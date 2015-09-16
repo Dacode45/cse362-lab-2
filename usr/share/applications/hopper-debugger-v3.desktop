@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Hopper Debugger v3
+Comment=Hopper Debugger v3
+Exec=/usr/bin/hopper-gdb-server-v3 %U
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=hopper-debugger-v3.png
+Categories=Application;Development;Utility;

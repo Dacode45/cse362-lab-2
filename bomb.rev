@@ -1,0 +1,85 @@
+function main (.text) {
+    0x400dc0: push rbx
+    # 0x400dc1: cmp edi, 1
+    # 0x400dc4: jne 0x400dd6
+    if (edi == '\x01') {
+        0x400dc6: rax = *(stdin@@GLIBC_2.2.5) # mov rax, qword ptr [rip + 0x203dbb]
+        0x400dcd: *(infile) = rax # mov qword ptr [rip + 0x203dcc], rax
+        0x400dd4: jmp 0x400e2f
+    } else {
+        0x400dd6: rbx = rsi # mov rbx, rsi
+        # 0x400dd9: cmp edi, 2
+        # 0x400ddc: jne 0x400e13
+        if (edi == '\x02') {
+            0x400dde: rdi = *(rsi + 8) # mov rdi, qword ptr [rsi + 8]
+            0x400de2: esi = 0x4023f0 (.rodata) "r" # mov esi, 0x4023f0
+            0x400de7: call 0x400c50 (.plt) <fopen@plt>
+            0x400dec: *(infile) = rax # mov qword ptr [rip + 0x203dad], rax
+            # 0x400df3: test rax, rax
+            # 0x400df6: jne 0x400e2f
+            if (rax == 0) {
+                0x400df8: rdx = *(rbx + 8) # mov rdx, qword ptr [rbx + 8]
+                0x400dfc: rsi = *(rbx) # mov rsi, qword ptr [rbx]
+                0x400dff: edi = 0x4023f2 (.rodata) "%s: Error: Couldn't open %s\n" # mov edi, 0x4023f2
+                0x400e04: call 0x400b60 (.plt) <printf@plt>
+                0x400e09: edi = 8 # mov edi, 8
+                0x400e0e: call 0x400c80 (.plt) <exit@plt>
+                0x400e13: rsi = *(rsi) # mov rsi, qword ptr [rsi]
+                0x400e16: edi = 0x40240f (.rodata) "Usage: %s [<input_file>]\n" # mov edi, 0x40240f
+                0x400e1b: eax = 0 # mov eax, 0
+                0x400e20: call 0x400b60 (.plt) <printf@plt>
+                0x400e25: edi = 8 # mov edi, 8
+                0x400e2a: call 0x400c80 (.plt) <exit@plt>
+            }
+        } else {
+            0x400e13: rsi = *(rsi) # mov rsi, qword ptr [rsi]
+            0x400e16: edi = 0x40240f (.rodata) "Usage: %s [<input_file>]\n" # mov edi, 0x40240f
+            0x400e1b: eax = 0 # mov eax, 0
+            0x400e20: call 0x400b60 (.plt) <printf@plt>
+            0x400e25: edi = 8 # mov edi, 8
+            0x400e2a: call 0x400c80 (.plt) <exit@plt>
+        }
+    }
+    0x400e2f: call 0x401407 (.text) <initialize_bomb>
+    0x400e34: edi = 0x402478 (.rodata) "Welcome to my fiendish little ..." # mov edi, 0x402478
+    0x400e39: call 0x400b40 (.plt) <puts@plt>
+    0x400e3e: edi = 0x4024b8 (.rodata) "which to blow yourself up. Hav..." # mov edi, 0x4024b8
+    0x400e43: call 0x400b40 (.plt) <puts@plt>
+    0x400e48: call 0x401677 (.text) <read_line>
+    0x400e4d: rdi = rax # mov rdi, rax
+    0x400e50: call 0x400ef0 (.text) <phase_1>
+    0x400e55: call 0x40179d (.text) <phase_defused>
+    0x400e5a: edi = 0x4024e8 (.rodata) "Phase 1 defused. How about the..." # mov edi, 0x4024e8
+    0x400e5f: call 0x400b40 (.plt) <puts@plt>
+    0x400e64: call 0x401677 (.text) <read_line>
+    0x400e69: rdi = rax # mov rdi, rax
+    0x400e6c: call 0x400f0c (.text) <phase_2>
+    0x400e71: call 0x40179d (.text) <phase_defused>
+    0x400e76: edi = 0x402429 (.rodata) "That's number 2.  Keep going!" # mov edi, 0x402429
+    0x400e7b: call 0x400b40 (.plt) <puts@plt>
+    0x400e80: call 0x401677 (.text) <read_line>
+    0x400e85: rdi = rax # mov rdi, rax
+    0x400e88: call 0x400f53 (.text) <phase_3>
+    0x400e8d: call 0x40179d (.text) <phase_defused>
+    0x400e92: edi = 0x402447 (.rodata) "Halfway there!" # mov edi, 0x402447
+    0x400e97: call 0x400b40 (.plt) <puts@plt>
+    0x400e9c: call 0x401677 (.text) <read_line>
+    0x400ea1: rdi = rax # mov rdi, rax
+    0x400ea4: call 0x4010c9 (.text) <phase_4>
+    0x400ea9: call 0x40179d (.text) <phase_defused>
+    0x400eae: edi = 0x402518 (.rodata) "So you got that one.  Try this..." # mov edi, 0x402518
+    0x400eb3: call 0x400b40 (.plt) <puts@plt>
+    0x400eb8: call 0x401677 (.text) <read_line>
+    0x400ebd: rdi = rax # mov rdi, rax
+    0x400ec0: call 0x401120 (.text) <phase_5>
+    0x400ec5: call 0x40179d (.text) <phase_defused>
+    0x400eca: edi = 0x402456 (.rodata) "Good work!  On to the next..." # mov edi, 0x402456
+    0x400ecf: call 0x400b40 (.plt) <puts@plt>
+    0x400ed4: call 0x401677 (.text) <read_line>
+    0x400ed9: rdi = rax # mov rdi, rax
+    0x400edc: call 0x40118d (.text) <phase_6>
+    0x400ee1: call 0x40179d (.text) <phase_defused>
+    0x400ee6: eax = 0 # mov eax, 0
+    0x400eeb: pop rbx
+    0x400eec: ret 
+}
